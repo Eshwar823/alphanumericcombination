@@ -8,7 +8,7 @@
      phone number is required
     </mat-error>
     <mat-error *ngIf="phoneNumberForm.get('number').hasError('pattern')">
-      First Name must follow this pattern!
+      Phone number must follow this pattern 123 456 7892
     </mat-error>
   </mat-form-field>
   <button mat-raised-button (click)="getCombinations()" color="primary">Get combinations</button>

@@ -12,7 +12,7 @@ export class AppComponent {
   dialList = ["", "", "ABC", "DEF", "GHI", "JKL",
     "MNO", "PQRS", "TUV", "WXYZ"];
   phoneNumberForm: FormGroup;
-  temporaryarray: string;
+  subPhoneNumber: string;
 
   totalCount: number;
   constructor(private fb: FormBuilder) {
@@ -27,23 +27,28 @@ export class AppComponent {
   getCombinations(): void {
     if (this.phoneNumberForm.valid) {
       this.combinationList = [];
-      let before;
+      let numberToConvert = [];
       let copyPhonenumber = this.phonenumber.replace(/ /g, "");
       let numbers = copyPhonenumber.split('');
       for (let i = numbers.length; i > 0; i--) {
         if (numbers[i] === '1' || numbers[i] === '0') {
-          this.temporaryarray = copyPhonenumber.slice(0, i + 1);
-          before = numbers.slice(i + 1, numbers.length);
+          this.subPhoneNumber = copyPhonenumber.slice(0, i + 1);
+          numberToConvert = numbers.slice(i + 1, numbers.length);
           break;
         }
       }
-      this.getListOfCombinations(before, 0, [], before.length)
+      if(numberToConvert.length > 0) {
+        this.getListOfCombinations(numberToConvert, 0, [], numberToConvert.length)
+      } else {
+        this.getListOfCombinations(numbers, 0, [], numbers.length)
+      }
+      
     }
   }
 
   getListOfCombinations(number, curr, output, n) {
     if (curr == n) {
-      this.combinationList.push({ 'number': this.temporaryarray + output.join("") })
+      this.combinationList.push({ 'number': this.subPhoneNumber + output.join("") })
       return;
     }
 
