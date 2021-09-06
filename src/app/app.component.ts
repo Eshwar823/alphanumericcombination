@@ -40,6 +40,7 @@ export class AppComponent {
       if(numberToConvert.length > 0) {
         this.getListOfCombinations(numberToConvert, 0, [], numberToConvert.length)
       } else {
+        this.subPhoneNumber = "";
         this.getListOfCombinations(numbers, 0, [], numbers.length)
       }
       
